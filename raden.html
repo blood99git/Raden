@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raden Choice</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+body{
+background:#0f0f0f;
+overflow:hidden;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+/* IKLAN */
+.ads{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:70px;
+background:white;
+display:flex;
+align-items:center;
+padding:8px;
+gap:10px;
+z-index:99999999;
+overflow:hidden;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+cursor:pointer;
+}
+
+.ads-img{
+height:55px;
+border-radius:10px;
+animation:shake 1s infinite;
+}
+
+.ads-text{
+color:black;
+font-weight:bold;
+white-space:nowrap;
+animation:slideText 8s linear infinite;
+}
+
+@keyframes slideText{
+from{
+transform:translateX(100%);
+}
+to{
+transform:translateX(-100%);
+}
+}
+
+@keyframes shake{
+0%{transform:rotate(-3deg);}
+50%{transform:rotate(3deg);}
+100%{transform:rotate(-3deg);}
+}
+
+/* CARD */
+.card{
+width:90%;
+max-width:400px;
+background:#181818;
+padding:20px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 30px rgba(255,255,255,0.1);
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
+.gif{
+width:180px;
+border-radius:15px;
+margin-bottom:15px;
+animation:spin 8s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+h1{
+margin-bottom:10px;
+}
+
+p{
+opacity:0.8;
+font-size:14px;
+margin-bottom:20px;
+}
+
+/* BUTTON */
+.btns{
+display:flex;
+gap:10px;
+justify-content:center;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:0.2s;
+}
+
+.accept{
+background:#00ff88;
+}
+
+.reject{
+background:#ff4444;
+color:white;
+}
+
+button:hover{
+transform:scale(1.08);
+}
+
+/* JUMPSCARE */
+#jumpscare{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+background:black;
+z-index:999999;
+overflow:hidden;
+}
+
+#jumpscare img{
+width:100%;
+height:100%;
+object-fit:cover;
+animation:
+flicker 0.08s infinite,
+shake 0.08s infinite;
+}
+
+@keyframes shake{
+
+0%{
+transform:translate(0px,0px);
+}
+
+20%{
+transform:translate(-8px,5px);
+}
+
+40%{
+transform:translate(8px,-5px);
+}
+
+60%{
+transform:translate(-5px,8px);
+}
+
+80%{
+transform:translate(5px,-8px);
+}
+
+100%{
+transform:translate(0px,0px);
+}
+
+}
+
+@keyframes flicker{
+
+0%{
+filter:
+invert(0)
+brightness(1)
+contrast(1);
+}
+
+10%{
+filter:
+invert(1)
+brightness(3)
+contrast(3);
+}
+
+20%{
+filter:
+invert(0)
+brightness(1);
+}
+
+30%{
+filter:
+invert(1)
+brightness(4)
+contrast(4);
+}
+
+40%{
+filter:
+invert(0);
+}
+
+50%{
+filter:
+invert(1)
+brightness(5);
+}
+
+60%{
+filter:
+invert(0);
+}
+
+70%{
+filter:
+invert(1)
+contrast(5);
+}
+
+80%{
+filter:
+invert(0);
+}
+
+90%{
+filter:
+invert(1)
+brightness(4);
+}
+
+100%{
+filter:
+invert(0);
+}
+
+}
+
+.flash{
+position:absolute;
+width:100%;
+height:100%;
+background:white;
+mix-blend-mode:difference;
+animation:flash 0.1s infinite;
+pointer-events:none;
+}
+
+@keyframes flash{
+0%{opacity:0;}
+50%{opacity:1;}
+100%{opacity:0;}
+}
+
+#goodEnding{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#101820;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999999;
+text-align:center;
+padding:20px;
+}
+
+.good-img{
+width:220px;
+border-radius:20px;
+margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="ads" onclick="goodEnding()">
+
+<img src="iphone.jpeg" class="ads-img">
+
+<div class="ads-text">
+🔥 SELAMAT! ANDA MEMENANGKAN IPHONE 17 PRO MAX 🔥
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="raden1.gif" class="gif">
+
+<h1>SELAMAT DATANG WEB RADEN</h1>
+
+<p>
+Website ini menggunakan cookie untuk alasan keamanan,
+kenyamanan pengguna, analitik, dan pengalaman modern.
+Silakan pilih "OK" untuk ke halaman di tujukan di bawah.
+</p>
+
+<div class="btns">
+<button class="accept" onclick="startScare()">OK </button>
+<button class="reject" onclick="startScare()">TOLAK</button>
+</div>
+
+</div>
+
+<div id="jumpscare">
+
+<img src="raden.jpeg">
+
+<div class="flash"></div>
+
+<audio id="a1" src="1.mp3"></audio>
+<audio id="a2" src="2.mp3"></audio>
+<audio id="a3" src="3.mp3"></audio>
+
+</div>
+
+<div id="goodEnding">
+
+<h1>🎉 GOOD ENDING 🎉</h1>
+
+<p>
+Kamu berhasil menghindari jumpscare Raden.
+</p>
+
+<img src="happy.gif" class="good-img">
+
+</div>
+
+<script>
+
+async function startScare(){
+
+// fullscreen
+document.documentElement.requestFullscreen().catch(()=>{});
+
+// tampilkan jumpscare
+document.getElementById("jumpscare").style.display = "flex";
+
+// ambil audio
+const a1 = document.getElementById("a1");
+const a2 = document.getElementById("a2");
+const a3 = document.getElementById("a3");
+
+a1.currentTime = 2;
+
+// loop audio
+a1.loop = true;
+a2.loop = true;
+a3.loop = true;
+
+// buat audio context
+const ctx = new AudioContext();
+
+// fungsi boost gain
+function boost(audio, gainValue){
+
+const source = ctx.createMediaElementSource(audio);
+
+const gainNode = ctx.createGain();
+
+gainNode.gain.value = gainValue;
+
+source.connect(gainNode);
+gainNode.connect(ctx.destination);
+
+audio.volume = 1.0;
+
+audio.play().catch(()=>{});
+
+}
+
+
+// jalankan audio dengan gain berbeda
+boost(a1, 8);
+boost(a2, 2.5);
+boost(a3, 2.5);
+
+setTimeout(()=>{
+
+alert("BAD ENDING 😱👀😨🥀");
+
+alert("ADA JUMPSCARE 🤔🥀😱");
+
+alert("GAME OVER 😱😨🤔👀");
+
+},1000);
+
+// vibrate HP
+if(navigator.vibrate){
+
+navigator.vibrate([
+300,100,
+300,100,
+600,100,
+600
+]);
+
+}
+
+// anti scroll
+document.body.style.overflow = "hidden";
+
+}
+
+function goodEnding(){
+
+document.getElementById("goodEnding").style.display = "flex";
+
+}
+
+</script>
+
+</body>
+</html>
